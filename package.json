@@ -1,6 +1,6 @@
 {
   "name": "@llmgatewayai/langsmith-tracer",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Trace LLM requests and responses using LangSmith",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nullplatform/llm-gateway-sdk": "^1.0.7"
+    "@nullplatform/llm-gateway-sdk": "^1.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.0",

@@ -1,10 +1,10 @@
 import {
     IPlugin,
-    PluginMetadata,
     IRequestContext,
     ILLMRequest,
     ILLMResponse,
-    IMessage
+    IMessage,
+    ExtensionMetadata
 } from '@nullplatform/llm-gateway-sdk';
 
 export class LangSmithTracerPluginConfig {
@@ -89,7 +89,7 @@ const ConfigSchema = {
     "additionalProperties": false
 };
 
-@PluginMetadata({
+@ExtensionMetadata({
     name: 'langsmith-tracer',
     version: '1.0.0',
     description: 'Traces LLM conversations to LangSmith for observability and monitoring',
@@ -121,7 +121,7 @@ export class LangSmithTracerPlugin implements IPlugin {
             return 'LangSmith API key is required';
         }
 
-        if (config.batchSize && config.batchSize < 1) {
+        if (config.batchSize !== undefined && config.batchSize < 1) {
             return 'batchSize must be at least 1';
         }
 
@@ -382,7 +382,6 @@ export class LangSmithTracerPlugin implements IPlugin {
             const runId = this.generateRunId();
             const now = new Date();
 
-            // Calculate interaction ID using the same logic as ClickHouse tracer
             const interactionId = this.calculateInteractionId(context);
 
             // Check if this is a continuation of an existing interaction
